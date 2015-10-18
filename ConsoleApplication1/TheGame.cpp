@@ -14,17 +14,18 @@ using namespace std;
 
 int main()
 {
-
-	cout << "| Welcome to the game! |\n";
+	srand(time(NULL));
+	cout << "| Welcome to the game! |" << endl;
 	cout << "Please enter your name: ";
 	string name;
 	cin >> name;
 
 	Character player(name, 1, 20);
+	Character enemy("Bitch", 1, 20);
 	
-	Battle battle;
-
-	battle.runBattle(player, battle);
+	cout << "Welcome " << player.getName() << "! You are fighting " << enemy.getName() << "!" << endl;
+	cout << "Press a to attack or h to heal." << endl;
+	Battle battle(player, enemy);
 
 	
 

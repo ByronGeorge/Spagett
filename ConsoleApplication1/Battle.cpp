@@ -4,78 +4,38 @@
 #include <time.h>
 #include "Character.h"
 #include <iostream>
+#include "Ability.h"
 
 
-
-Battle::Battle()
+Battle::Battle(Character player, Character enemy)
 {
+	loop(player, enemy);
 }
 
+void Battle::loop(Character player,Character enemy) {
+	cout << "Player health: " << player.getHealth() << " Enemy health: " << enemy.getHealth() << endl;
 
-void Battle::setDamage(int x)
-{
-	
+	while (true) {
+		string playerChoice;
+		cin >> playerChoice;
 
-	damage = x + (rand() % 3);
-}
-
-int Battle::getDamage()
-{
-	return damage;
-}
-
-void Battle::setHeal(int x)
-{
-	
-
-	heal = x + (rand() % 2);
-}
-
-int Battle::getHeal()
-{
-	return heal;
-}
-
-void Battle::runBattle(Character player, Battle battle)
-{
-	Character enemy("Enemy", 1, 20);
-
-	while (true)
-	{
-
-		srand(time(NULL));
-
-
-		battle.setDamage(player.getLevel());
-
-		cout << "player damage: " << battle.getDamage() << "\n";
-
-
-		enemy.setHealth(enemy.getHealth() - battle.getDamage());
-
-		if (enemy.getHealth() <= 0){
-			cout << "Player wins!";
+		if (playerChoice.compare("a") == 0) {
+			Ability::attack(player, enemy);
+		}
+		else if (playerChoice.compare("h") == 0) {
+			Ability::heal(player);
+		}
+		else {
+			cout << "Invalid!";
+		}
+		cout << "Player health: " << player.getHealth() << " Enemy health: " << enemy.getHealth() << endl;
+		if ((player.getHealth() <= 0) || (enemy.getHealth() <= 0)) {
 			break;
 		}
-			
-
-		battle.setDamage(enemy.getLevel());
-
-		cout << "Enemy damage: " << battle.getDamage() << "\n";
-
-		player.setHealth(player.getHealth() - battle.getDamage());
-
-		if (player.getHealth() <= 0){
-			cout << "Enemy won!";
+		Ability::attack(enemy, player);
+		cout << "Player health: " << player.getHealth() << " Enemy health: " << enemy.getHealth() << endl;
+		if ((player.getHealth() <= 0) || (enemy.getHealth() <= 0)) {
 			break;
-
 		}
-			
-
-		
-
-		cout << "Player health: " << player.getHealth() << " " << "Enemy Health: " << enemy.getHealth() << "\n";
 	}
-
 }
-

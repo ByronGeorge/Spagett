@@ -8,17 +8,11 @@ using namespace std;
 class Battle
 {
 public:
-	Battle();
-	void setDamage(int x);
-	int getDamage();
-	void setHeal(int x);
-	int getHeal();
-	void runBattle(Character player, Battle battle);
+	Battle(Character player, Character enemy);
+	void loop(Character player, Character enemy);
 	
 private:
 
-	int damage;
-	int heal;
 };
 
 #endif
