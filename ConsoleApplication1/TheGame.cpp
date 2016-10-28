@@ -14,6 +14,9 @@ using namespace std;
 
 int main()
 {
+	for (int i = 0; i < 20; i++) {
+		cout << "Spagett!" << endl;	
+	}
 	srand(time(NULL));
 	cout << "| Welcome to the game! |" << endl;
 	cout << "Please enter your name: ";
